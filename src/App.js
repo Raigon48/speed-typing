@@ -1,12 +1,11 @@
 import React, {useState, useEffect} from 'react';
 
 function App() {
-  const DEFAULT_TIME = 5;
+  const DEFAULT_TIME = 120;
   const [text, setText] = useState('');
   const [timeRemaining, setTimeRemaining] = useState(DEFAULT_TIME);
   const [gameRunning, setGameRunning] = useState(false);
   const [wordCount, setWordCount] = useState(0);
-  var count = 0;
 
   useEffect(()=> {
       if(gameRunning && timeRemaining > 0){
@@ -22,6 +21,7 @@ function App() {
   function startGame() {
     setGameRunning(true);
     setTimeRemaining(DEFAULT_TIME);
+    setText('');
     setWordCount(0);
   }
 
@@ -46,7 +46,7 @@ function App() {
   return (
     <div>
       <h1>Speed Typing</h1>
-      <textarea placeholder="Start Typing Here..." onChange={handleChange} disabled={!gameRunning}/>
+      <textarea placeholder="Start Typing Here..." onChange={handleChange} value={text} disabled={!gameRunning}/>
       <h4>Time Remaining : {timeRemaining}</h4>
       <button onClick={startGame}  disabled={gameRunning}>{gameRunning ? '....' : 'Start'}</button>
       <h1>Word Count : {wordCount}</h1>
